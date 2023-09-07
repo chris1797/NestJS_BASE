@@ -3,6 +3,9 @@
  */
 
 import { Module } from '@nestjs/common';
+import { CreateBoardDto } from './board.dto';
 
-@Module({})
+@Module({
+    imports: [CreateBoardDto]
+})
 export class BoardModule { }
