@@ -13,8 +13,4 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('board')
-  getBoard(): void {
-    return this.boardService.getBoard();
-  }
 }
