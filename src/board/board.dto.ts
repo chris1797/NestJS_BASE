@@ -1,3 +1,4 @@
+import {readonly, setLog} from "./board.decorators";
 
 export class CreateBoardDto {
 
@@ -5,7 +6,6 @@ export class CreateBoardDto {
     private title: string
     private content: string
     private regDate: Date = new Date()
-
 
     constructor(title: string, content: string,) {
         this.title = title
@@ -15,8 +15,6 @@ export class CreateBoardDto {
     get getBoardNo(): number {
         return this.boardNo
     }
-
-
     @setLog
     set setContent(content: string) {
         this.content = content
