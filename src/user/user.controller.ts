@@ -1,8 +1,8 @@
-import { UserService } from './user.service';
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { UserEntity } from './user.entity';
+import { UserService } from './user.service';
 
-@Controller('board')
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 

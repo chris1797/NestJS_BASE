@@ -1,17 +1,16 @@
-import { readonly, setLog } from './user.decorators';
-import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class UserEntity {
+
   @PrimaryGeneratedColumn()
-  @readonly(true)
   private id: number;
 
   @Column()
   private name: string;
 
   @Column()
-  private created_at: Timestamp;
+  private created_at: string;
 
   get getId(): number {
     return this.id;
