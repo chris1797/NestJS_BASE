@@ -7,11 +7,12 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get()
-  getBoard(): string {
-    return this.userService.getUser();
+  async getBoard(): Promise<UserEntity> {
+
+    return await this.userService.getUser(1);
   }
 
-  @Post()
+  @Post('save')
   save(@Body() userEntity: UserEntity) {
     this.userService.save(userEntity);
   }

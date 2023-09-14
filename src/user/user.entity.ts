@@ -1,22 +1,22 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class UserEntity {
+@Entity() // 해당 클래스는 엔티티임을 선언
+export class UserEntity extends BaseEntity {
 
-  @PrimaryGeneratedColumn()
-  private id: number;
-
-  @Column()
-  private name: string;
+  @PrimaryGeneratedColumn() // primary key
+  id: number;
 
   @Column()
-  private created_at: string;
+  name: string;
 
-  get getId(): number {
-    return this.id;
-  }
+  @Column()
+  created_at: string;
 
-  get getName(): string {
-    return this.name;
-  }
+  // get getId(): number {
+  //   return this.id;
+  // }
+
+  // get getName(): string {
+  //   return this.name;
+  // }
 }

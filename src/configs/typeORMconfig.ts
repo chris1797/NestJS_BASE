@@ -3,9 +3,10 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-const ormconfig: TypeOrmModuleOptions = {
+export const ormconfig: TypeOrmModuleOptions = {
     type: 'postgres',
     host: 'localhost',
+    port: 5432,
     username: 'ijaehun',
     password: '',
     database: 'do_develop',
@@ -13,5 +14,3 @@ const ormconfig: TypeOrmModuleOptions = {
     synchronize: true,
 
 }
-
-export default ormconfig
