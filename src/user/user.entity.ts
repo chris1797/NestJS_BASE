@@ -3,6 +3,7 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity() // 해당 클래스는 엔티티임을 선언
 export class UserEntity extends BaseEntity {
 
+
   @PrimaryGeneratedColumn() // primary key
   id: number;
 
@@ -19,4 +20,7 @@ export class UserEntity extends BaseEntity {
   // get getName(): string {
   //   return this.name;
   // }
+  setCreated_at(created_at: string): void {
+    this.created_at = created_at
+  }
 }

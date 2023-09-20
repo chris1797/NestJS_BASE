@@ -22,11 +22,14 @@ export class UserService {
   }
 
   async save(userEntity: UserEntity) {
-    const user = {
-      name: 'chris'
+    const today = new Date()
+    const formatToday = today.toString
+    const user: UserEntity = {
+      name: 'chris',
+      // created_at: formatToday
     }
     await this.userRepository.save(user);
-  }
+  } x
 
 
   async getUser(id: number): Promise<UserEntity> {
