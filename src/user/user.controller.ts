@@ -14,7 +14,7 @@ export class UserController {
 
   @Post('save')
   save(@Body() userEntity: UserEntity) {
-    this.userService.save(userEntity);
+    this.userService.save();
   }
 
   @Put()

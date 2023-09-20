@@ -21,13 +21,11 @@ export class UserService {
     throw new Error('Method not implemented.');
   }
 
-  async save(userEntity: UserEntity) {
-    const today = new Date()
-    const formatToday = today.toString
-    const user: UserEntity = {
-      name: 'chris',
-      // created_at: formatToday
-    }
+  async save() {
+    const user = new UserEntity();
+    // const today = dayjs();
+    user.name = 'chris'
+    user.created_at = '2023-09-21'
     await this.userRepository.save(user);
   } x
 
