@@ -18,7 +18,8 @@ export class UserService {
   }
 
   async delete(id: number) {
-    throw new Error('Method not implemented.');
+    if (!id) throw new Error('Can not find User data.');
+    return await this.userRepository.delete(id);
   }
 
   async save() {

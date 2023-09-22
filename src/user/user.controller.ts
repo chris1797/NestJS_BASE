@@ -23,7 +23,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  delete(@Body() id: number) {
-    this.userService.delete(id);
+  async delete(@Body() id: number) {
+    return await this.userService.delete(id);
   }
 }
