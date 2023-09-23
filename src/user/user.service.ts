@@ -1,43 +1,46 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserEntity } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { UserRepository } from './user.repository';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class UserService {
-
   constructor(
-    @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>) {
+    @InjectRepository(UserRepository)
+    private readonly userRepository: UserRepository,
+  ) {}
 
+  async update(id: number, name: string) {
+    const result = await this.userRepository.updateUser(id, name);
+    if (result.affected < 1) throw new Error('Update fail.');
+
+    return 'Update success';
   }
 
-  update(userEntity: UserEntity) {
+  async delete(id: number): Promise<string> {
+    const result = await this.userRepository.delete(id);
+    if (result.affected < 1) throw new Error('User data not found');
 
-  }
-
-  async delete(id: number) {
-    if (!id) throw new Error('Can not find User data.');
-    return await this.userRepository.delete(id);
+    return 'Delete success';
   }
 
   async save() {
     const user = new UserEntity();
-    // const today = dayjs();
-    user.name = 'chris'
-    user.created_at = '2023-09-21'
-    await this.userRepository.save(user);
-  } x
+    let today = dayjs().format('YYYY-MM-DD');
+    user.name = 'chris';
+    user.created_at = today;
 
+    const result = await this.userRepository.save(user);
+    if (!result) throw new Error('Save fail');
+    return 'Save success';
+  }
 
   async getUser(id: number): Promise<UserEntity> {
-    const user = await this.userRepository.findOneBy({ id: id });
-    return user;
+    return await this.userRepository.findOneBy({ id: id });
   }
 
   async fildAll(): Promise<UserEntity[]> {
-    return this.userRepository.find()
+    return await this.userRepository.find();
   }
-
 }
