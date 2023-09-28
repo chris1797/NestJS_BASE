@@ -36,8 +36,8 @@ export class UserController {
     @Param('id') id: number,
     @Param('name') name: string,
   ): Promise<string> {
-    // console.log('id :::', id);
-    // console.log('name :::', name);
+    console.log('id :::', id);
+    console.log('name :::', name);
     return await this.userService.update(id, name);
   }
 
