@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 import * as dayjs from 'dayjs';
@@ -26,7 +26,7 @@ export class UserService {
   }
 
   async save() {
-    const user = new UserEntity();
+    const user = new User();
     let today = dayjs().format('YYYY-MM-DD');
     user.name = 'chris';
     user.created_at = today;
@@ -36,11 +36,11 @@ export class UserService {
     return 'Save success';
   }
 
-  async getUser(id: number): Promise<UserEntity> {
+  async getUser(id: number): Promise<User> {
     return await this.userRepository.findOneBy({ id: id });
   }
 
-  async fildAll(): Promise<UserEntity[]> {
+  async fildAll(): Promise<User[]> {
     return await this.userRepository.find();
   }
 }

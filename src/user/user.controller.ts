@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -16,7 +16,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async getUsersAll(): Promise<UserEntity[]> {
+  async getUsersAll(): Promise<User[]> {
     return await this.userService.fildAll();
   }
 
@@ -25,9 +25,9 @@ export class UserController {
     return await this.userService.getUser(id);
   }
 
-  // @HttpCode(300) 상태코드 추가
+  // @HttpCode(300) 상태 코드 추가
   @Post('save')
-  async save(@Body() userEntity: UserEntity): Promise<string> {
+  async save(@Body() userEntity: User): Promise<string> {
     return await this.userService.save();
   }
 

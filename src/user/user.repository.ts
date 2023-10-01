@@ -1,17 +1,17 @@
 import { DataSource, getConnection, Repository, UpdateResult } from 'typeorm';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class UserRepository extends Repository<UserEntity> {
+export class UserRepository extends Repository<User> {
   constructor(private dataSource: DataSource) {
-    super(UserEntity, dataSource.createEntityManager());
+    super(User, dataSource.createEntityManager());
   }
 
   async updateUser(id: number, name: string): Promise<UpdateResult> {
     return await this.dataSource
       .createQueryBuilder()
-      .update(UserEntity)
+      .update(User)
       .set({ name: name })
       .where('id = :id', { id: id })
       .execute();
