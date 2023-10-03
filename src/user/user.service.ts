@@ -3,6 +3,7 @@ import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 import * as dayjs from 'dayjs';
+import { isEmpty } from '@nestjs/common/utils/shared.utils';
 
 @Injectable()
 export class UserService {
@@ -10,6 +11,14 @@ export class UserService {
     @InjectRepository(UserRepository)
     private readonly userRepository: UserRepository,
   ) {}
+
+  async fildAll(): Promise<User[]> {
+    return await this.userRepository.find();
+  }
+
+  async getUser(id: number): Promise<User> {
+    return await this.userRepository.findOneBy({ id: id });
+  }
 
   async update(id: number, name: string) {
     const result = await this.userRepository.updateUser(id, name);
@@ -25,22 +34,14 @@ export class UserService {
     return 'Delete success';
   }
 
-  async save() {
-    const user = new User();
-    let today = dayjs().format('YYYY-MM-DD');
-    user.name = 'chris';
-    user.created_at = today;
+  async insert(user: User) {
+    if (isEmpty(user)) throw new Error('Can not find User data');
 
-    const result = await this.userRepository.save(user);
+    // user.name = 'chris';
+    user.created_at = dayjs().format('YYYY-MM-DD');
+
+    const result = await this.userRepository.insert(user);
     if (!result) throw new Error('Save fail');
     return 'Save success';
-  }
-
-  async getUser(id: number): Promise<User> {
-    return await this.userRepository.findOneBy({ id: id });
-  }
-
-  async fildAll(): Promise<User[]> {
-    return await this.userRepository.find();
   }
 }

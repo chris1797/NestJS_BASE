@@ -27,8 +27,8 @@ export class UserController {
 
   // @HttpCode(300) 상태 코드 추가
   @Post('save')
-  async save(@Body() userEntity: User): Promise<string> {
-    return await this.userService.save();
+  async save(@Body() user: User): Promise<string> {
+    return await this.userService.insert(user);
   }
 
   @Put('/:id/:name')
