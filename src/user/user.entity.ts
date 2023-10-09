@@ -1,4 +1,12 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Board } from '../board/board.entity';
 
 @Entity() // 해당 클래스는 엔티티임을 선언
 export class User extends BaseEntity {
@@ -8,10 +16,10 @@ export class User extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
-  created_at: string;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
-  setCreated_at(created_at: string): void {
-    this.created_at = created_at;
-  }
+  // User(1) <-> Board(*)
+  @OneToMany((type) => Board, (board) => board.user)
+  boards!: Board[];
 }

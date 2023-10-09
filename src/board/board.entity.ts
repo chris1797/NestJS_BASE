@@ -1,4 +1,12 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from '../user/user.entity';
 
 @Entity()
 export class Board extends BaseEntity {
@@ -7,6 +15,15 @@ export class Board extends BaseEntity {
 
   @Column() title: string;
   @Column() content: string;
-  @Column() regDate: Date;
-  @Column() user_id: User;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  // Board(*) <-> User(1)
+  // User Delete에 의한 cascade option 추가
+  @ManyToOne((type) => User, (user) => user.boards, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
+  user!: User;
 }
