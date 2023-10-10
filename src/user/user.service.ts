@@ -37,9 +37,6 @@ export class UserService {
   async insert(user: User) {
     if (isEmpty(user)) throw new Error('Can not find User data');
 
-    // user.name = 'chris';
-    // user.createdAt = dayjs().format('YYYY-MM-DD');
-
     const result = await this.userRepository.insert(user);
     if (!result) throw new Error('Save fail');
     return 'Save success';
