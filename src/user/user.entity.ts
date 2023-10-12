@@ -20,6 +20,6 @@ export class User extends BaseEntity {
   createdAt: Date;
 
   // User(1) <-> Board(*)
-  @OneToMany((type) => Board, (board) => board.user)
-  boards!: Board[];
+  @OneToMany(() => Board, (board) => board.user)
+  boards: Board[];
 }

@@ -16,7 +16,7 @@ export class BoardService {
   async insert(board: Board) {
     if (!board) throw new Error('Can not find Board data');
 
-    if (board.user) {
+    if (board.id) {
       const { id, ...newBoard } = board;
       const result = await this.boardRepository.update(
         { id: board.id },

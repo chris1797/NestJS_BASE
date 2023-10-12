@@ -20,9 +20,9 @@ export class Board extends BaseEntity {
   createdAt: Date;
 
   // Board(*) <-> User(1)
-  @ManyToOne((type) => User, (user) => user.boards, {
+  @ManyToOne(() => User, (user) => user.boards, {
     nullable: false,
     onDelete: 'CASCADE',
   })
-  user!: User;
+  user: User;
 }
