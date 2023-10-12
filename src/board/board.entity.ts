@@ -20,7 +20,6 @@ export class Board extends BaseEntity {
   createdAt: Date;
 
   // Board(*) <-> User(1)
-  // User Delete에 의한 cascade option 추가
   @ManyToOne((type) => User, (user) => user.boards, {
     nullable: false,
     onDelete: 'CASCADE',
