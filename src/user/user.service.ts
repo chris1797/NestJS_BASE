@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
-import * as dayjs from 'dayjs';
 import { isEmpty } from '@nestjs/common/utils/shared.utils';
 
 @Injectable()
